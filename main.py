@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-pd.options.mode.chained_assignment = None  # default='warn'
+pd.set_option('mode.chained_assignment', None)
 
 class Spotify_Recommendation():
     def __init__(self, dataset):
@@ -19,7 +19,7 @@ class Spotify_Recommendation():
                     d = d + np.absolute(float(song[col]) - float(i[col]))
             distance.append(d)
         # dataset_without_the_song['distance'] = distance
-        dataset_without_the_song.loc[:, ('distance')] = distance
+        dataset_without_the_song.loc[:,'distance']= distance
         dataset_without_the_song = dataset_without_the_song.sort_values('distance')
         columns = ['artists', 'name']
         return dataset_without_the_song[columns][:amount]
