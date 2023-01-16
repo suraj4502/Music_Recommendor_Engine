@@ -17,7 +17,8 @@ class Spotify_Recommendation():
                 if not col in [1, 6, 12, 14, 18]:
                     d = d + np.absolute(float(song[col]) - float(i[col]))
             distance.append(d)
-        dataset_without_the_song['distance'] = distance
+        # dataset_without_the_song['distance'] = distance
+        dataset_without_the_song.loc[:, ('distance')] = distance
         dataset_without_the_song = dataset_without_the_song.sort_values('distance')
         columns = ['artists', 'name']
         return dataset_without_the_song[columns][:amount]
@@ -59,6 +60,8 @@ st.markdown(
 
 
 st.title("Music Recommendor Engine 🎶")
+
+st.markdown('---')
 
 col1, col2 = st.columns([2,1])
 with col1:
